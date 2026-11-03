@@ -4,6 +4,15 @@ on:
 jobs:
   say-hello-inline-bash:
     runs-on: ubuntu-latest
+    env:
+      NEW_VAR: text
+      
     steps:
       - name: Say Hello
         run: echo "Hello, World!"
+      - name: variables
+        run: echo "${{github.ref}}
+      - name: variables
+        run: echo "${{NEW_VAR}}
+
+      
