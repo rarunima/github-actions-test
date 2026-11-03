@@ -1,29 +1,26 @@
 name: Hello World Workflow
-on: 
+
+on:
   workflow_dispatch:
+
 jobs:
   test:
-    runs-on: ${{matrix.os}}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         node: [24]
-  
-  
-     env:
+    env:
       NEW_VAR: job_variable
-      
     steps:
-      - uses: actions/checkout@v7.0.1
-      - uses: actions/setup-node@v7.1.0
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - name: Say Hello
         run: echo "Hello, World!"
       - name: variables
-        run: echo "${{github.ref}}
+        run: echo "${{ github.ref }}"
       - name: test1
-        run: echo "${{NEW_VAR}}
-
-      
+        run: echo "${{ env.NEW_VAR }}"
