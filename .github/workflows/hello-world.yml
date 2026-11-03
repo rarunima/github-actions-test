@@ -2,12 +2,23 @@ name: Hello World Workflow
 on: 
   workflow_dispatch:
 jobs:
-  say-hello-inline-bash:
-    runs-on: ubuntu-latest
-    env:
-      NEW_VAR: text
+  test:
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [24]
+  
+  
+     env:
+      NEW_VAR: job_variable
       
     steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
       - name: Say Hello
         run: echo "Hello, World!"
       - name: variables
